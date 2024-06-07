@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.backend.dto.ResponseMsgDTO;
 import com.example.backend.services.userService;
 
 @RestController
@@ -15,7 +16,7 @@ public class userController {
     @Autowired
     private userService us;
     @PostMapping("/addUser")
-    public ResponseEntity<?> addUser(@RequestBody Map<Object, Object> body) {
+    public ResponseEntity<String> addUser(@RequestBody Map<Object, Object> body) {
         boolean b=us.addUser(body);
         if(b){
             return ResponseEntity.ok("User added successfully");
@@ -23,13 +24,13 @@ public class userController {
         return ResponseEntity.badRequest().body("Please fill all required Details");
     }
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Map<Object, Object> body){
+    public ResponseEntity<ResponseMsgDTO> login(@RequestBody Map<Object, Object> body){
         boolean b=us.login(body);
         if(b){
             System.out.println("Hello");
-            return ResponseEntity.ok("Login successfully");
+            return ResponseEntity.ok(new ResponseMsgDTO("User Logged in successfully"));
         }
-        return ResponseEntity.badRequest().body("Wrong user Details");
+        return ResponseEntity.badRequest().body(new ResponseMsgDTO("Wrong user Details"));
     }
 
 }
