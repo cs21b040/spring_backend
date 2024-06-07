@@ -15,10 +15,13 @@ public class userImpl implements userService {
     private UserRepository userRepo;
     @Override
     public boolean addUser(Map<Object, Object> mp) {
-                String name = (String) mp.get("name");
+        String name = (String) mp.get("name");
         String email = (String) mp.get("email");
         String password = (String) mp.get("password");
         if(name.isEmpty() || email.isEmpty() || password.isEmpty()){
+            return false;
+        }
+        if(userRepo.existsByEmail(email)){
             return false;
         }
         user u=new user();

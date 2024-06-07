@@ -16,12 +16,12 @@ public class userController {
     @Autowired
     private userService us;
     @PostMapping("/addUser")
-    public ResponseEntity<String> addUser(@RequestBody Map<Object, Object> body) {
+    public ResponseEntity<ResponseMsgDTO> addUser(@RequestBody Map<Object, Object> body) {
         boolean b=us.addUser(body);
         if(b){
-            return ResponseEntity.ok("User added successfully");
+            return ResponseEntity.ok(new ResponseMsgDTO("User added successfully"));
         }
-        return ResponseEntity.badRequest().body("Please fill all required Details");
+        return ResponseEntity.badRequest().body(new ResponseMsgDTO("Please fill all required Details"));
     }
     @PostMapping("/login")
     public ResponseEntity<ResponseMsgDTO> login(@RequestBody Map<Object, Object> body){

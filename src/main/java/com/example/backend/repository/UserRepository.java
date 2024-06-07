@@ -9,4 +9,5 @@ import com.example.backend.entity.user;
 @Repository
 public interface UserRepository extends MongoRepository<user,String>{
     Optional<user> findByEmail(String email);
+    boolean existsByEmail(String email);
 }
