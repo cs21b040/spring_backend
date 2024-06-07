@@ -4,10 +4,10 @@ import org.springframework.stereotype.Service;
 import com.anyascii.AnyAscii;
 import com.example.backend.services.GeminiService;
 import com.example.backend.services.botService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 import lombok.AllArgsConstructor;
 
+// import com.fasterxml.jackson.core.JsonProcessingException;
 @Service
 @AllArgsConstructor
 public class botImpl implements botService{
@@ -15,10 +15,10 @@ public class botImpl implements botService{
     @Override
     public String getResponse(String msg)  {
         try {
-            String response_from_gemini = gs.getResponse(msg);
-            System.out.println(response_from_gemini);
-            return transliterateString(response_from_gemini);
-        } catch (JsonProcessingException e) {
+            // String response_from_gemini = gs.getResponse(msg);
+            // System.out.println(response_from_gemini);
+            return transliterateString(msg);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "Unable to process request!! Try again later";
