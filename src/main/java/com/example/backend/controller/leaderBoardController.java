@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,21 +37,6 @@ public class leaderBoardController {
                 return ResponseEntity.ok().body(new ResponseMsgDTO("Score added successfully"));
             }
             return ResponseEntity.badRequest().body(new ResponseMsgDTO("Failed to add score"));
-        }
-    }
-    @PutMapping("/updateScore")
-    public ResponseEntity<ResponseMsgDTO> updateScore(@RequestBody Map<String, String> body) {
-        String mail=body.get("mail");
-        int score=Integer.parseInt(body.get("score"));
-        if(mail.isEmpty() || body.get("score").isEmpty()){
-            return ResponseEntity.badRequest().body(new ResponseMsgDTO("Invalid input"));
-        }
-        else{
-            boolean res=lbs.updateScore(mail, score);
-            if(res){
-                return ResponseEntity.ok().body(new ResponseMsgDTO("Score updated successfully"));
-            }
-            return ResponseEntity.badRequest().body(new ResponseMsgDTO("Failed to update score"));
         }
     }
     @PostMapping("/getLeaderBoard")

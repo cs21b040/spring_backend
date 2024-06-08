@@ -22,7 +22,8 @@ public class leaderBoard {
     private int score;
     private String mail;
     private LocalDateTime timestamp;
-    public leaderBoard(int score){
+    public leaderBoard(int score,String temp){
         this.score = score;
+        name=temp;
     }
 }

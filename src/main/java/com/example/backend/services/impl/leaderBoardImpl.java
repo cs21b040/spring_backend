@@ -29,31 +29,23 @@ public class leaderBoardImpl implements leaderBoardService {
     @Override
     public boolean addScore(String name,String mail, int score,LocalDateTime timestamp) {
         try {
-            leaderBoard lb=new leaderBoard();
-            lb.setName(name);
-            lb.setMail(mail);
-            lb.setScore(score);
-            lb.setTimestamp(timestamp);
-            System.out.println(lb.getName()+" "+lb.getScore()+" "+lb.getTimestamp()+" "+lb.getMail());
-            repo.save(lb);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-    @Override
-    public boolean updateScore(String mail, int score) {
-        try {
-            Optional<leaderBoard> lb=repo.findByMail(mail);
-            if(lb.isPresent()){
-                leaderBoard md=lb.get();
+            Optional<leaderBoard> op=repo.findByMail(mail);
+            if(op.isPresent()){
+                leaderBoard md=op.get();
                 md.setScore(score);
+                md.setTimestamp(timestamp);
                 repo.save(md);
                 return true;
             }
-            return false;
-
+            else{
+                leaderBoard lb=new leaderBoard();
+                lb.setName(name);
+                lb.setMail(mail);
+                lb.setScore(score);
+                lb.setTimestamp(timestamp);
+                repo.save(lb);
+                return true;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -72,7 +64,7 @@ public class leaderBoardImpl implements leaderBoardService {
                 return lb1;
             }
             if(lb.get(i).getMail().equals(mail)){
-                lb1.add(new leaderBoard(i));
+                lb1.add(new leaderBoard(i,"You-1"));
                 return lb1;
             }
         }
