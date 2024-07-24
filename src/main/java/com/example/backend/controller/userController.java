@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.backend.dto.ResponseMsgDTO;
+import com.example.backend.entity.user;
 import com.example.backend.services.userService;
 
 @RestController
@@ -16,21 +16,20 @@ public class userController {
     @Autowired
     private userService us;
     @PostMapping("/addUser")
-    public ResponseEntity<ResponseMsgDTO> addUser(@RequestBody Map<Object, Object> body) {
-        boolean b=us.addUser(body);
-        if(b){
-            return ResponseEntity.ok(new ResponseMsgDTO("User added successfully"));
+    public ResponseEntity<user> addUser(@RequestBody Map<Object, Object> body) {
+        user b=us.addUser(body);
+        if(b!=null){
+            return ResponseEntity.ok(b);
         }
-        return ResponseEntity.badRequest().body(new ResponseMsgDTO("Please fill all required Details"));
+        return ResponseEntity.badRequest().body(new user());
     }
     @PostMapping("/login")
-    public ResponseEntity<ResponseMsgDTO> login(@RequestBody Map<Object, Object> body){
-        boolean b=us.login(body);
-        if(b){
-            System.out.println("Hello");
-            return ResponseEntity.ok(new ResponseMsgDTO("User Logged in successfully"));
+    public ResponseEntity<user> login(@RequestBody Map<Object, Object> body){
+        user b=us.login(body);
+        if(b!=null){
+            return ResponseEntity.ok(b);
         }
-        return ResponseEntity.badRequest().body(new ResponseMsgDTO("Wrong user Details"));
+        return ResponseEntity.badRequest().body(new user());
     }
 
 }

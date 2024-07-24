@@ -14,15 +14,15 @@ public class userImpl implements userService {
     @Autowired
     private UserRepository userRepo;
     @Override
-    public boolean addUser(Map<Object, Object> mp) {
+    public user addUser(Map<Object, Object> mp) {
         String name = (String) mp.get("name");
         String email = (String) mp.get("email");
         String password = (String) mp.get("password");
         if(name.isEmpty() || email.isEmpty() || password.isEmpty()){
-            return false;
+            return null;
         }
         if(userRepo.existsByEmail(email)){
-            return false;
+            return null;
         }
         user u=new user();
         u.setName(name);
@@ -32,12 +32,12 @@ public class userImpl implements userService {
             userRepo.save(u);
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
-        return true;
+        return u;
     }
     @Override
-    public boolean login(Map<Object, Object> mp) {
+    public user login(Map<Object, Object> mp) {
         String email=(String) mp.get("email");
         String password=(String) mp.get("password");
         if(!email.isEmpty() && !password.isEmpty()){
@@ -45,10 +45,10 @@ public class userImpl implements userService {
             if(ou.isPresent()){
                 user u=ou.get();
                 if(u.getPassword().equals(password)){
-                    return true;
+                    return u;
                 }
             }
         }
-        return false;
+        return null;
     }
 }

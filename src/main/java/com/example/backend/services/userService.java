@@ -2,8 +2,10 @@ package com.example.backend.services;
 
 import java.util.Map;
 
+import com.example.backend.entity.user;
+
 public interface userService {
 
-    public boolean addUser(Map<Object,Object>mp);
-    public boolean login(Map<Object,Object>mp);
+    public user addUser(Map<Object,Object>mp);
+    public user login(Map<Object,Object>mp);
 }
