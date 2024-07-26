@@ -16,11 +16,11 @@ public class bank {
     String name;
     String phone;
     String email;
-    Long deposit;
+    Double deposit;
     String CountryCode;
     String accountType;
     Long AccountNo;
-    public bank(String name, String phone, String email, Long deposit, String CountryCode, String accountType) {
+    public bank(String name, String phone, String email, Double deposit, String CountryCode, String accountType) {
         this.name = name;
         this.phone = phone;
         this.email = email;

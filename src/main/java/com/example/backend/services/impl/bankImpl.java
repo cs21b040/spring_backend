@@ -23,7 +23,7 @@ public class bankImpl implements bankService{
         String mail = (String)mp.get("mail");
         String countryCode = (String)mp.get("countryCode");
         String accType = (String)mp.get("accType");
-        Long deposit = Long.parseLong((String) mp.get("deposit"));
+        Double deposit = Double.parseDouble((String) mp.get("deposit"));
         if (name == null || name.isEmpty() || phone == null || phone.isEmpty() ||
             mail == null || mail.isEmpty() || countryCode == null || countryCode.isEmpty() ||
             accType == null || accType.isEmpty() ||deposit == null) {
