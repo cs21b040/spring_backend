@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface bankRepository extends MongoRepository<bank, String> {
     Optional<bank>findByEmailAndAccountType(String email,String accountType);
+    Optional<bank> findByAccountNo(Long AccountNo);
 }

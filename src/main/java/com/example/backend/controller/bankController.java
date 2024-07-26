@@ -29,5 +29,11 @@ public class bankController {
     //     if(b!=null) return ResponseEntity.ok(b);
     //     return ResponseEntity.badRequest().body(null);
     // }
+    @PostMapping("/bank/get")
+    public ResponseEntity<bank> get(@RequestBody Map<Object,Object>body) {
+        bank b=bs.getAccount(body);
+        if(b!=null) return ResponseEntity.ok(b);
+        return ResponseEntity.badRequest().body(null);
+    }
     
 }

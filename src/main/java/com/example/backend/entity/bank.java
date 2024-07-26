@@ -19,13 +19,15 @@ public class bank {
     Double deposit;
     String CountryCode;
     String accountType;
-    Long AccountNo;
-    public bank(String name, String phone, String email, Double deposit, String CountryCode, String accountType) {
+    Long accountNo;
+    Long pin;
+    public bank(String name, String phone, String email, Double deposit, String CountryCode, String accountType,Long pin) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.deposit = deposit;
         this.CountryCode = CountryCode;
         this.accountType = accountType;
+        this.pin=pin;
     }
 }

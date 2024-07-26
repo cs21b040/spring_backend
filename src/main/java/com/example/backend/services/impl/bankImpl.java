@@ -23,10 +23,11 @@ public class bankImpl implements bankService{
         String mail = (String)mp.get("mail");
         String countryCode = (String)mp.get("countryCode");
         String accType = (String)mp.get("accType");
+        Long pin=Long.parseLong((String)mp.get("pin"));
         Double deposit = Double.parseDouble((String) mp.get("deposit"));
         if (name == null || name.isEmpty() || phone == null || phone.isEmpty() ||
             mail == null || mail.isEmpty() || countryCode == null || countryCode.isEmpty() ||
-            accType == null || accType.isEmpty() ||deposit == null) {
+            accType == null || accType.isEmpty() ||deposit == null || pin == null) {
             return null;
         }
         Optional<bank>userExists = bankRepo.findByEmailAndAccountType(mail, accType);
@@ -35,7 +36,7 @@ public class bankImpl implements bankService{
         }
         else{
             try {
-                bank b=new bank(name,phone,mail,deposit,countryCode,accType);
+                bank b=new bank(name,phone,mail,deposit,countryCode,accType,pin);
                 long count = bankRepo.count();
                 b.setAccountNo(count+1);
                 bankRepo.save(b);
@@ -45,6 +46,26 @@ public class bankImpl implements bankService{
                 e.printStackTrace();
                 return null;
             }
+        }
+    }
+
+    @Override
+    public bank getAccount(Map<Object, Object> mp) {
+        String name=(String)mp.get("name");
+        Long accNo=Long.parseLong((String)mp.get("accNo"));
+        Long pin=Long.parseLong((String)mp.get("pin"));
+        Optional<bank>userExists = bankRepo.findByAccountNo(accNo);
+        if(userExists.isPresent()){
+            bank b=userExists.get();
+            if(b.getName().equals(name) && b.getPin().equals(pin)){
+                return b;
+            }
+            else{
+                return null;
+            }
+        }
+        else{
+            return null;
         }
     }
 }
