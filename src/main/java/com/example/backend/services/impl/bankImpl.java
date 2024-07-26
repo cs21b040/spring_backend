@@ -57,7 +57,7 @@ public class bankImpl implements bankService{
         Optional<bank>userExists = bankRepo.findByAccountNo(accNo);
         if(userExists.isPresent()){
             bank b=userExists.get();
-            if(b.getName().equals(name) && b.getPin().equals(pin)){
+            if(b.getPin().equals(pin)){
                 return b;
             }
             else{
