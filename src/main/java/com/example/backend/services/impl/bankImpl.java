@@ -1,4 +1,5 @@
 package com.example.backend.services.impl;
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Optional;
 
@@ -36,7 +37,8 @@ public class bankImpl implements bankService{
         }
         else{
             try {
-                bank b=new bank(name,phone,mail,deposit,countryCode,accType,pin);
+                LocalDateTime date = LocalDateTime.now();
+                bank b=new bank(name,phone,mail,deposit,countryCode,accType,pin,date);
                 long count = bankRepo.count();
                 b.setAccountNo(count+1);
                 bankRepo.save(b);
@@ -51,7 +53,6 @@ public class bankImpl implements bankService{
 
     @Override
     public bank getAccount(Map<Object, Object> mp) {
-        String name=(String)mp.get("name");
         Long accNo=Long.parseLong((String)mp.get("accNo"));
         Long pin=Long.parseLong((String)mp.get("pin"));
         Optional<bank>userExists = bankRepo.findByAccountNo(accNo);
