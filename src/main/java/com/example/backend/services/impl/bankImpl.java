@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import com.example.backend.repository.bankRepository;
 import com.example.backend.services.bankService;
@@ -66,6 +67,26 @@ public class bankImpl implements bankService{
             }
         }
         else{
+            return null;
+        }
+    }
+
+    @Override
+    public bank update(Map<Object, Object> mp) {
+        Long accNo=Long.parseLong((String)mp.get("accNo"));
+        Long pin=Long.parseLong((String)mp.get("pin"));
+        Double deposit=Double.parseDouble((String)mp.get("deposit"));
+        Optional<bank>userExists = bankRepo.findByAccountNo(accNo);
+        if (userExists.isPresent()) {
+            bank user = userExists.get();
+            bankRepo.delete(user);
+            if(!user.getPin().equals(pin)){
+                return null;
+            }
+            user.setDeposit(deposit);
+            bankRepo.save(user);
+            return user;
+        } else {
             return null;
         }
     }

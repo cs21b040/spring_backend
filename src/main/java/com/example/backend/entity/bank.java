@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,6 +16,8 @@ import lombok.Setter;
 @Setter
 @Document(collection = "bank")
 public class bank {
+    @Id
+    String id;
     String name;
     String phone;
     String email;

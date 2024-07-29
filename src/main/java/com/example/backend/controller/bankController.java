@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import com.example.backend.entity.bank;
 import com.example.backend.services.bankService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -22,12 +23,12 @@ public class bankController {
         if(b!=null) return ResponseEntity.ok(b);
         return ResponseEntity.badRequest().body(null);
     }
-    // @Update("/bank/update")
-    // public ResponseEntity<bank> postMethodName(@RequestBody Map<Object,Object>body) {
-    //     bank b=bs.update(body);
-    //     if(b!=null) return ResponseEntity.ok(b);
-    //     return ResponseEntity.badRequest().body(null);
-    // }
+    @PutMapping("/bank/update")
+    public ResponseEntity<bank> postMethodName(@RequestBody Map<Object,Object>body) {
+        bank b=bs.update(body);
+        if(b!=null) return ResponseEntity.ok(b);
+        return ResponseEntity.badRequest().body(null);
+    }
     @PostMapping("/bank/get")
     public ResponseEntity<bank> get(@RequestBody Map<Object,Object>body) {
         bank b=bs.getAccount(body);
